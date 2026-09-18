@@ -1,15 +1,11 @@
 import {Router, Request, Response } from "express";
 import {body, param, validationResult} from "express-validator";
-import {getAllAuthors, getAuthorsById ,createUser} from "../contollers/Author"
+import {getAllAuthors, getAuthorsById , createAuthor} from "../controllers/Author"
 import { Authors } from "../models";
 
 const router = Router()
 
-let authors = [
-    // {id: 1, name: "Fundiswa",email:"Fundiswa@gmail.com" },
-    // {id: 2, name: "Zenande",email:"Zenande@gmail.com" },
-    // {id: 3, name: "Akhona",email:"Akhona@gmail.com" },
-]
+let authors = []
 
 router.get("/",getAllAuthors) 
     
@@ -39,7 +35,7 @@ router.get("/:id",
     if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array() })
     }
-     createUser(req, res)
+     createAuthor(req, res)
 });
 export default router;
 

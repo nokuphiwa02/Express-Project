@@ -1,17 +1,18 @@
-import bodyParser from 'body-parser';
-import express , { Express } from 'express';
-import { looggerMiddleware } from './middleware/logger';
-import router from './routes/Author';
+import bodyParser from "body-parser";
+import express, { Express } from "express";
+import { looggerMiddleware } from "./middleware/logger";
+import router from "./routes/Author";
 
 const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json())
-app.use(bodyParser.json())
+app.use(express.json());
+app.use(bodyParser.json());
 
-app.use(looggerMiddleware)
-app.use("/v1/Authors", router)
+app.use(looggerMiddleware);
+app.use("/v1/Authors", router);
+app.use("/v1/Books",router);
 
 app.listen(PORT, () => {
-console.log(`Server is running on http://localhost:${PORT}`);
-}); 
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
