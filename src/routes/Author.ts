@@ -12,8 +12,8 @@ import { Authors } from "../models";
 
 const router = Router();
 
-// let authors = []
 
+//Get all authors
 router.get("/", getAllAuthors);
 
 router.get(
@@ -23,11 +23,14 @@ router.get(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
-    } //getting books by author Id
+    } 
+    
+    //getting books by author Id
     getBooksByAuthor(req, res);
   },
 );
 
+//Get Books by Authors
 //http://localhost:3000/:id
 router.get(
   "/:id",
@@ -45,6 +48,8 @@ router.get(
   },
 );
 
+
+//Create new Authors
 router.post(
   "/",
   [
@@ -59,6 +64,8 @@ router.post(
     createAuthor(req, res);
   },
 );
+
+
 //Update Authors by Id
 router.put(
   "/:id",

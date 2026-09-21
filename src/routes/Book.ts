@@ -5,8 +5,11 @@ import { Books } from "../models";
 
 const router = Router();
 
+//Get all Books
 router.get("/", getAllBooks);
 
+
+//Get Books BY Id
 //http://localhost:3000/:id
 router.get(
   "/:id",
@@ -24,6 +27,8 @@ router.get(
   },
 );
 
+
+//Create New Books
 router.post(
   "/",
   [

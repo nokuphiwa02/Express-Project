@@ -24,10 +24,10 @@ export const getAuthorsById = (req: Request, res: Response) => {
 
 //get books by an authorId
 export const getBooksByAuthor = (req: Request, res: Response) => {
-  const { id } = req.params; // using filter to search the books with the author
-
-  const authorBooks = books.filter(
-    (book) => book.authorId === parseInt(id as string),
+  const { id } = req.params;
+  
+  // using filter to search the books with the author
+  const authorBooks = books.filter((book) => book.authorId === parseInt(id as string),
   );
 
   res.status(200).json(authorBooks);
