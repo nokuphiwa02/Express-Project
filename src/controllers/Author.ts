@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { Authors } from "../models";
+import { books } from "../controllers/Book"
+import { param } from "express-validator"
 
-let authors: Authors[] =[]
+ export let authors: Authors[] =[]
 
 export const getAllAuthors = (req: Request, res: Response) => {
     res.status(200).json(authors)
