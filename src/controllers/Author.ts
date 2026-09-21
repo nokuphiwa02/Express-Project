@@ -42,3 +42,19 @@ export const createAuthor = (req: Request, res: Response) => {
 
   res.status(201).json(newAuthor);
 };
+
+//Update author by Id
+export const editAuthor = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { name, email } = req.body;
+
+  const author = authors.find((author) => author.id === parseInt(id as string));
+
+  if (!author) {
+    return res.status(404).json({ message: "author not found" });
+  }
+  author.name = name ?? author.name;
+  author.email = email ?? author.email;
+
+  res.status(200).json(author);
+};
