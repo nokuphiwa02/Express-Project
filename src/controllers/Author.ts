@@ -1,31 +1,44 @@
 import { Request, Response } from "express";
 import { Authors } from "../models";
-import { books } from "../controllers/Book"
-import { param } from "express-validator"
+import { books } from "../controllers/Book";
 
- export let authors: Authors[] =[]
+//export authors so that i'll be able to import it in books controller
+export let authors: Authors[] = [];
 
+//get all Authors
 export const getAllAuthors = (req: Request, res: Response) => {
-    res.status(200).json(authors)
-}
+  res.status(200).json(authors);
+};
 
-export const getAuthorsById = (req: Request, res: Response) =>{
-    const { id } = req.params
-    const author = authors.find((author) => author.id === parseInt(id as string));
+//get Author by id
+export const getAuthorsById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const author = authors.find((author) => author.id === parseInt(id as string));
 
-    if(!author){
-        return res.status(404).send("user not found");
-    }
+  if (!author) {
+    return res.status(404).send("author not found");
+  }
 
-    res.status(200).json(author);
-}
+  res.status(200).json(author);
+};
 
-   export const createAuthor =(req: Request, res: Response) => {
-    const {name, email} = req.body
-        const newAuthor= {id: authors.length + 1, name,email}
-    
-        authors.push(newAuthor);
-    
-        res.status(201).json(newAuthor);
-}
+//get books by an authorId
+export const getBooksByAuthor = (req: Request, res: Response) => {
+  const { id } = req.params; // using filter to search the books with the author
 
+  const authorBooks = books.filter(
+    (book) => book.authorId === parseInt(id as string),
+  );
+
+  res.status(200).json(authorBooks);
+};
+
+//create an Author
+export const createAuthor = (req: Request, res: Response) => {
+  const { name, email } = req.body;
+  const newAuthor = { id: authors.length + 1, name, email };
+
+  authors.push(newAuthor);
+
+  res.status(201).json(newAuthor);
+};
