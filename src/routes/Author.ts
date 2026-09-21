@@ -5,6 +5,8 @@ import {
   getAuthorsById,
   getBooksByAuthor,
   createAuthor,
+  editAuthor,
+  deleteAuthor,
 } from "../controllers/Author";
 import { Authors } from "../models";
 
@@ -57,4 +59,37 @@ router.post(
     createAuthor(req, res);
   },
 );
+//Update Authors by Id
+router.put(
+  "/:id",
+  [
+    param("id").isInt().withMessage("ID must be an integer"),
+    body("name").optional().notEmpty().withMessage("Name is required"),
+    body("email")
+      .optional()
+      .isEmail()
+      .withMessage("Must be a valid email address"),
+  ],
+  (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    editAuthor(req, res);
+  },
+);
+
+//Delete Authors by Id
+router.delete(
+  "/:id",
+  [param("id").isInt().withMessage("ID must be an integer")],
+  (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    deleteAuthor(req, res);
+  },
+);
+
 export default router;
