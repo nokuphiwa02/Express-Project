@@ -58,3 +58,18 @@ export const editAuthor = (req: Request, res: Response) => {
 
   res.status(200).json(author);
 };
+//delete author by Id
+export const deleteAuthor = (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const index = authors.findIndex(
+    (author) => author.id === parseInt(id as string),
+  );
+
+  if (index === -1) {
+    return res.status(400).json({ message: "author not found" });
+  }
+  authors.splice(index, 1);
+
+  res.status(200).json({ messege: "author deleted successfully" });
+};
