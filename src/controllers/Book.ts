@@ -32,7 +32,7 @@ export const createBook = (req: Request, res: Response) => {
 };
 
 //Update Books by Id
-export const editAuthor = (req: Request, res: Response) => {
+export const editBook = (req: Request, res: Response) => {
   const { id } = req.params;
   const { title, authorId, year } = req.body;
 

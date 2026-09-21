@@ -72,10 +72,7 @@ router.put(
   [
     param("id").isInt().withMessage("ID must be an integer"),
     body("name").optional().notEmpty().withMessage("Name is required"),
-    body("email")
-      .optional()
-      .isEmail()
-      .withMessage("Must be a valid email address"),
+    body("email").optional().isEmail().withMessage("Must be a valid email address"),
   ],
   (req: Request, res: Response) => {
     const errors = validationResult(req);
