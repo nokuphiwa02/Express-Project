@@ -28,8 +28,7 @@ router.post(
   "/",
   [
     body("title").notEmpty().withMessage("Title is required"),
-    body("authorId")
-      .isInt()
+    body("authorId").isInt()
       .withMessage("Author ID is required and must be an integer"),
     body("year").isInt().withMessage("Year must be a valid number "),
   ],
